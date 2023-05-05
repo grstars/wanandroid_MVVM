@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.ui.bottom.navi.NaviViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:orientation="horizontal"
+        tools:context=".ui.bottom.navi.NavigationFragment">
+
+        <q.rorbin.verticaltablayout.VerticalTabLayout
+            android:id="@+id/vertical_tab_layout"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            app:indicator_color="@color/color_white"
+            app:indicator_gravity="fill"
+            app:tab_height="50dp"
+            app:tab_margin="16dp"
+            app:tab_mode="scrollable"
+            app:titleList="@{viewModel.mTitlesList}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_8"
+            android:layout_weight="1"
+            android:background="@color/color_white" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.ui.nav.todo.todocontent.ToDoContentViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.nav.todo.todocontent.ToDoContentFragment">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_8"
+            app:contentPadding="@dimen/dimen_8"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:todoCheck="@{viewModel.status}" />
+
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:text="截止时间："
+                    app:layout_constraintBottom_toBottomOf="@+id/checkbox"
+                    app:layout_constraintLeft_toRightOf="@+id/checkbox"
+                    app:layout_constraintTop_toTopOf="@+id/checkbox" />
+
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.toDoData.dateStr}"
+                    app:layout_constraintBottom_toBottomOf="@+id/checkbox"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_1"
+                    app:layout_constraintTop_toTopOf="@+id/checkbox"
+                    tools:text="2020-02-02" />
+
+
+                <ImageView
+                    android:id="@+id/iv_priority"
+                    android:layout_width="@dimen/dimen_16"
+                    android:layout_height="@dimen/dimen_16"
+                    android:layout_marginRight="@dimen/margin"
+                    android:src="@mipmap/ic_star_outline"
+                    android:onClick="@{()->viewModel.changeToDoPriority()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_time"
+                    app:layout_constraintRight_toLeftOf="@+id/btn_delete"
+                    app:layout_constraintTop_toTopOf="@+id/tv_time"
+                    app:todoGrade="@{viewModel.priority}" />
+
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin"
+                    android:paddingLeft="@dimen/dimen_8"
+                    android:paddingTop="@dimen/dimen_4"
+                    android:paddingRight="@dimen/dimen_8"
+                    android:paddingBottom="@dimen/dimen_4"
+                    android:text="@string/delete"
+                    android:textColor="@color/color_white"
+                    android:onClick="@{()->viewModel.deleteToDo()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/checkbox"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/checkbox"
+                    app:qmui_backgroundColor="@color/color_red"
+                    app:qmui_radius="@dimen/dimen_8" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_8"
+            app:contentPadding="@dimen/dimen_8"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_16"
+                    android:layout_marginTop="@dimen/dimen_8"
+                    android:text="@string/todo_title"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+                <EditText
+                    android:id="@+id/et_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginTop="@dimen/dimen_8"
+                    android:layout_marginRight="@dimen/margin"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="@dimen/dimen_8"
+                    android:text="@={viewModel.title}"
+                    android:textSize="@dimen/text_15"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+
+                <EditText
+                    android:id="@+id/et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:layout_marginTop="@dimen/margin"
+                    android:layout_marginRight="@dimen/margin"
+                    android:background="@drawable/edit_text_bg"
+                    android:gravity="top"
+                    android:minLines="5"
+                    android:padding="@dimen/dimen_8"
+                    android:textSize="@dimen/text_15"
+                    android:text="@={viewModel.content}"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_16"
+                    android:layout_marginTop="@dimen/dimen_32"
+                    android:text="@string/todo_type"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_content" />
+
+
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_type">
+
+                    <RadioButton
+                        android:id="@+id/btn1"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/radiobutton_background"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/todo_study"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/btn2"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/radiobutton_background"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/todo_work"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/btn3"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/radiobutton_background"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="@string/todo_life"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="14sp" />
+
+
+                    <RadioButton
+                        android:id="@+id/btn4"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/radiobutton_background"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="@string/todo_other"
+                        android:textColor="@drawable/radiobutton_textcolor"
+                        android:textSize="14sp" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/btn_update"
+            style="@style/QMUIRoundButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin"
+            android:onClick="@{()->viewModel.updateTodo()}"
+            android:text="@string/todo_update"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:qmui_backgroundColor="@color/qmui_btn_bg"
+            app:qmui_radius="@dimen/dimen_8" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
